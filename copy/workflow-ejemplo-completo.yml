@@ -1,0 +1,43 @@
+name: Workflow Ejemplo - Configuración Completa
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, dev]
+  pull_request:
+
+jobs:
+  job-ejemplo:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      actions: write
+      workflows: write
+      id-token: write
+    
+    steps:
+      - name: Checkout con credenciales completas
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Configurar Git identidad
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      
+      - name: Verificar configuración
+        run: |
+          echo "=== VERIFICACIÓN DE CONFIGURACIÓN ==="
+          echo "Branch: $(git branch --show-current)"
+          echo "Remote URL:"
+          git remote -v
+          echo "Config user.name: $(git config --global user.name)"
+          echo "Config user.email: $(git config --global user.email)"
+          echo "JS API URL: ${{ github.api_url }}"
+          echo "JS Repository: ${{ github.repository }}"
+          echo "Ghost: $(gh api user --jq '.login 2>/dev/null || echo \"No authenticated\"')"
