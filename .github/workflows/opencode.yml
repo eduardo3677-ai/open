@@ -22,7 +22,7 @@ jobs:
        - name: Checkout repository
          uses: actions/checkout@v6
          with:
-           persist-credentials: true
+           persist-credentials: false
        - name: Configurar identidad de Git
          run: |
            git config --global user.name "github-actions[bot]"
