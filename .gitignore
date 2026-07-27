@@ -1,0 +1,15 @@
+# Ignore large files to avoid GitHub size limits
+*.zip
+*.appx
+*.exe
+*.dll
+*.msi
+*.iso
+*.bin
+
+# Ignore acer_analysis directory
+acer_analysis/
+
+# Keep only analysis scripts in root
+analysis_*.py
+ACER_ANALYSIS_SUMMARY.md
