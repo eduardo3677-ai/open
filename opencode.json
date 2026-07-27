@@ -9,9 +9,24 @@
       ],
       "options": {
         "baseURL": "https://eduardob-1534-resource.services.ai.azure.com/openai/v1",
-        "apiKey": "{env:DASHSCOPE_API_KEY}"
+        "apiKey": "{env:DASHSCOPE_API_KEY}",
+        "swagger": {
+          "chat_completions": "https://eduardob-1534-resource.services.ai.azure.com/managed-deployments/qwen--qwen3-coder-next/v1/chat/completions",
+          "swagger_json": "https://eduardob-1534-resource.services.ai.azure.com/managed-deployments/qwen--qwen3-coder-next/swagger.json",
+          "messages": "https://eduardob-1534-resource.services.ai.azure.com/managed-deployments/qwen--qwen3-coder-next/v1/messages"
+        }
       },
-      "models": {
+      "deployment": {
+        "accelerator_type": "H100_80GB",
+        "accelerators_per_instance": 4,
+        "model_instances": 2,
+        "total_accelerators": 8,
+        "model_name": "qwen--qwen3-coder-next",
+        "source": "azure-huggingface",
+        "model_version": 1,
+        "model_id": "qwen--qwen3-coder-next"
+      }
+"models": {
         "qwen--qwen3-coder-next": {
           "name": "Qwen3-coder-next",
           "modalities": {
@@ -19,9 +34,18 @@
             "output": ["text"]
           },
           "options": {
+            "temperature": 0.6,
+            "max_completion_tokens": 4096,
+            "top_p": 1,
+            "top_k": 40,
+            "presence_penalty": 0,
+            "frequency_penalty": 0,
             "thinking": {
               "type": "enabled"
             }
+          }
+        }
+      }
           }
         }
       }
