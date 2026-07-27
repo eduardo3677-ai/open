@@ -1,0 +1,113 @@
+{
+  "analysis_timestamp": "2026-07-27T20:20:16.926418",
+  "analysis_type": "network_patterns",
+  "summary": {
+    "total_endpoints": 3,
+    "total_protocols": 2,
+    "total_libraries": 6,
+    "total_patterns": 3
+  },
+  "endpoints": [
+    {
+      "url": "https://device-info-uat-ycrmvsk7ia-uc.a.run.app",
+      "host": "device-info-uat-ycrmvsk7ia-uc.a.run.app",
+      "protocol": "https",
+      "type": "device_information",
+      "port": 443,
+      "analysis_timestamp": "2026-07-27T20:20:16.926365"
+    },
+    {
+      "url": "https://device-info-prd-imub2p4wyq-uc.a.run.app",
+      "host": "device-info-prd-imub2p4wyq-uc.a.run.app",
+      "protocol": "https",
+      "type": "device_information",
+      "port": 443,
+      "analysis_timestamp": "2026-07-27T20:20:16.926389"
+    },
+    {
+      "url": "https://global-download.acer.com",
+      "host": "global-download.acer.com",
+      "protocol": "https",
+      "type": "download_server",
+      "port": 443,
+      "analysis_timestamp": "2026-07-27T20:20:16.926400"
+    }
+  ],
+  "protocols": [
+    {
+      "name": "HTTPS",
+      "version": "1.2+",
+      "purpose": "Encrypted communication",
+      "security": "SSL/TLS encryption"
+    },
+    {
+      "name": "HTTP",
+      "version": "1.1",
+      "purpose": "Web requests",
+      "security": "Unencrypted (not recommended)"
+    }
+  ],
+  "network_libraries": [
+    {
+      "filename": "libssl-3-x64.dll",
+      "purpose": "SSL/TLS communication",
+      "category": "security"
+    },
+    {
+      "filename": "libcrypto-3-x64.dll",
+      "purpose": "Cryptographic operations",
+      "category": "security"
+    },
+    {
+      "filename": "cares.dll",
+      "purpose": "Asynchronous DNS resolution",
+      "category": "network"
+    },
+    {
+      "filename": "brotlicommon.dll",
+      "purpose": "Compression/decompression",
+      "category": "compression"
+    },
+    {
+      "filename": "brotlidec.dll",
+      "purpose": "Compression/decompression",
+      "category": "compression"
+    },
+    {
+      "filename": "brotlienc.dll",
+      "purpose": "Compression/decompression",
+      "category": "compression"
+    }
+  ],
+  "patterns": [
+    {
+      "pattern": "HTTP POST requests",
+      "description": "Standard POST method for data submission",
+      "headers": [
+        "Content-Type",
+        "User-Agent",
+        "Authorization"
+      ],
+      "security_notes": "Should use HTTPS"
+    },
+    {
+      "pattern": "Device identification",
+      "description": "Sending hardware information",
+      "parameters": [
+        "SNID",
+        "UUID",
+        "Model"
+      ],
+      "security_notes": "Contains sensitive device data"
+    },
+    {
+      "pattern": "Version checking",
+      "description": "Update version comparison",
+      "mechanisms": [
+        "Server comparison",
+        "Local registry check"
+      ],
+      "security_notes": "Secure update verification needed"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Acer Public Endpoint Usage Guide",
+  "disclaimer": "Use only official Acer clients and methods. Respect rate limits and terms of service.",
+  "public_endpoints": [
+    {
+      "name": "Global Download Server",
+      "url": "https://global-download.acer.com",
+      "purpose": "Public download access",
+      "usage_notes": "Web browser access supported",
+      "authentication": "None required for public files"
+    }
+  ],
+  "recommended_usage": [
+    "Use Acer Care Center for automated downloads",
+    "Access through official Acer support website",
+    "Contact Acer support for recovery media",
+    "Use provided recovery tools from Acer"
+  ],
+  "limitations": [
+    "Some downloads require device validation",
+    "Factory images may have additional restrictions",
+    "Personal authentication may be required for copyrighted content",
+    "Rate limiting may apply"
+  ]
+}
