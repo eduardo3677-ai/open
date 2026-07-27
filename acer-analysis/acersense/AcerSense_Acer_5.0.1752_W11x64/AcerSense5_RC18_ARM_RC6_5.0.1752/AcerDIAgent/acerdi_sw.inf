@@ -1,0 +1,64 @@
+;/*++
+; Copyright (c) I3D Technology Inc.  All rights reserved.
+; INF: acerdi_sw.inf
+;--*/
+
+[Version]
+Signature = "$Windows NT$"
+Class = SoftwareComponent
+ClassGuid = {5c4c3332-344d-483c-8739-259e934c9cc8}
+Provider = %ManufacturerName%
+CatalogFile = acerdi_sw.cat
+DriverVer = 05/21/2023,1.2.7.1007
+PnpLockdown = 1
+
+[Manufacturer]
+%ManufacturerName% = ADISWComponent, NTamd64.10.0...22000
+
+[ADISWComponent.NTamd64.10.0...22000]
+%DeviceName% = ADISWComponent_Install, SWC\SWComp_AcerDeviceInfoSW2Driver
+
+[SourceDisksFiles]
+AcerDIAgent.exe = 1
+server_crt.pem = 1
+server_key.pem = 1
+
+[SourceDisksNames]
+1 = %ACCExtensionDisc%
+
+[DestinationDirs]
+ADISWComponent_CopyFiles = 16422, AcerDIAgent ; %ProgramFiles%\AcerDIAgent
+ADISWComponent_DelFiles = 16422, AcerDIAgent ; %ProgramFiles%\AcerDIAgent
+
+[ADISWComponent_Install.NT]
+CopyFiles = ADISWComponent_CopyFiles
+DelFiles = ADISWComponent_DelFiles
+
+[ADISWComponent_Install.NT.Services]
+AddService = , 0x00000002
+AddService = AcerDIAgentSvis, 0x00000800, ADISWComponent_ServiceInstall
+
+[ADISWComponent_ServiceInstall]
+DisplayName   = %ServiceName%
+Description   = %ServiceDesc%
+ServiceType   = 0x00000010
+StartType     = 2                        ; SERVICE_WIN32_OWN_PROCESS
+ErrorControl  = 1                        ; SERVICE_AUTO_START
+ServiceBinary = "%16422%\AcerDIAgent\AcerDIAgent.exe"
+
+[ADISWComponent_CopyFiles]
+AcerDIAgent.exe
+server_crt.pem
+server_key.pem
+
+[ADISWComponent_DelFiles]
+AcerDIAgent.exe
+server_crt.pem
+server_key.pem
+
+[Strings]
+ManufacturerName = "Acer Incorporated"
+ServiceName      = "Acer Device Info"
+ServiceDesc      = "Acer Device Info Service"
+ACCExtensionDisc = "Acer Device Info Software Component Disk"
+DeviceName = "Acer Device Info Software Component"

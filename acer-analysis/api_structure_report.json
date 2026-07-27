@@ -1,0 +1,175 @@
+{
+  "generation_timestamp": "2026-07-27T20:21:06.813381",
+  "report_type": "api_structure_analysis",
+  "summary": {
+    "url_templates": 2,
+    "parameters_analyzed": 5,
+    "api_patterns": 3,
+    "documentation_sections": 4
+  },
+  "analysis_results": {
+    "discovered_patterns": [
+      {
+        "pattern_name": "Device Information Request",
+        "method": "POST",
+        "endpoint": "device-info servers",
+        "request_body": {
+          "device_id": "required",
+          "hardware_info": "optional",
+          "system_info": "optional"
+        },
+        "response_format": "JSON",
+        "authentication": "Required (certificate-based)"
+      },
+      {
+        "pattern_name": "Download Request",
+        "method": "GET",
+        "endpoint": "download servers",
+        "query_parameters": {
+          "acerid": "required",
+          "model": "required",
+          "os": "optional"
+        },
+        "response_format": "Binary or redirect",
+        "authentication": "May require validation"
+      },
+      {
+        "pattern_name": "Version Check",
+        "method": "POST",
+        "endpoint": "update servers",
+        "request_body": {
+          "current_version": "required",
+          "model": "required",
+          "device_id": "required"
+        },
+        "response_format": "JSON",
+        "authentication": "Typically required"
+      }
+    ],
+    "url_templates": [
+      {
+        "pattern": "https://global-download.acer.com/GDFiles/{type}/",
+        "description": "Generic download path template",
+        "parameters": {
+          "type": [
+            "BIOS",
+            "Recovery",
+            "Driver",
+            "Factory",
+            "Utility"
+          ]
+        },
+        "status": "public"
+      },
+      {
+        "pattern": "https://{subdomain}.acer.com/api/v1/{endpoint}",
+        "description": "Generic API endpoint template",
+        "parameters": {
+          "subdomain": [
+            "global-download",
+            "support",
+            "service"
+          ],
+          "endpoint": [
+            "download",
+            "info",
+            "update",
+            "check"
+          ]
+        },
+        "status": "public"
+      }
+    ],
+    "parameter_analysis": [
+      {
+        "parameter": "acerid",
+        "purpose": "Acer device identifier",
+        "type": "string",
+        "format": "UUID or serial number format",
+        "required": true,
+        "notes": "Specific to Acer devices"
+      },
+      {
+        "parameter": "SNID",
+        "purpose": "Serial Number ID",
+        "type": "string",
+        "format": "Hardware serial number",
+        "required": true,
+        "notes": "Extracted from hardware"
+      },
+      {
+        "parameter": "Model",
+        "purpose": "Device model identifier",
+        "type": "string",
+        "format": "e.g., ASPIRE A315-59",
+        "required": true,
+        "notes": "Case sensitive"
+      },
+      {
+        "parameter": "OS",
+        "purpose": "Operating system version",
+        "type": "string",
+        "format": "e.g., Win11, Win10",
+        "required": false,
+        "notes": "For OS-specific downloads"
+      },
+      {
+        "parameter": "LC",
+        "purpose": "Language/Location Code",
+        "type": "string",
+        "format": "ISO language code",
+        "required": false,
+        "notes": "Regional content"
+      }
+    ],
+    "api_documentation": {
+      "api_overview": {
+        "base_domain": "acer.com",
+        "api_version": "v1",
+        "supported_protocols": [
+          "HTTPS/1.1"
+        ],
+        "authentication_methods": [
+          "Certificate-based",
+          "Token-based"
+        ],
+        "data_formats": [
+          "JSON",
+          "Binary"
+        ]
+      },
+      "endpoints": {
+        "device_information": {
+          "base_url": "https://device-info-{env}.a.run.app",
+          "environments": [
+            "uat",
+            "prd"
+          ],
+          "purpose": "Collect device information",
+          "access_level": "Authenticated"
+        },
+        "downloads": {
+          "base_url": "https://global-download.acer.com",
+          "purpose": "Provide downloadable files",
+          "access_level": "Public with restrictions"
+        }
+      },
+      "security_features": {
+        "encryption": "TLS 1.2+",
+        "certificate_validation": "Required",
+        "authentication": "Certificate and/or token-based",
+        "rate_limiting": "Likely implemented"
+      },
+      "response_codes": {
+        "200": "Success",
+        "301": "Redirect",
+        "302": "Found",
+        "400": "Bad Request",
+        "401": "Unauthorized",
+        "403": "Forbidden",
+        "404": "Not Found",
+        "500": "Server Error"
+      }
+    }
+  }
+}

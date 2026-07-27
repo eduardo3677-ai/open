@@ -1,0 +1,54 @@
+;/*++
+; Copyright (c) I3D Technology Inc.  All rights reserved.
+; INF: acerqa_ext.inf
+;--*/
+
+[Version]
+Signature = "$WINDOWS NT$"
+Class = Extension
+ClassGuid = {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+Provider = %ManufacturerName%
+ExtensionId = {f0ccc0ca-0b24-465e-a9c5-b60fb2a16b4a}
+CatalogFile = acerqa_ext.cat
+DriverVer = 05/21/2024,1.2.23.1021
+PnpLockdown = 1
+
+[Manufacturer]
+%ManufacturerName% = AQAExtension, NTamd64.10.0...22000
+
+[AQAExtension.NTamd64.10.0...22000]
+%AQAExtensionDisc% = AQAExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_10031025 ; Aspire
+%AQAExtensionDisc% = AQAExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_10041025 ; Swift
+%AQAExtensionDisc% = AQAExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_10051025 ; TravelMate
+%AQAExtensionDisc% = AQAExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_10061025 ; Extensa
+
+; Next-Gen x86
+%AQAExtensionDisc% = AQAExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_11031025 ; Aspire
+%AQAExtensionDisc% = AQAExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_11041025 ; Swift
+%AQAExtensionDisc% = AQAExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_11051025 ; TravelMate
+%AQAExtensionDisc% = AQAExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_11061025 ; Extensa
+
+; Next-Gen AMD
+%AQAExtensionDisc% = AQAExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_13031025 ; Aspire
+%AQAExtensionDisc% = AQAExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_13041025 ; Swift
+%AQAExtensionDisc% = AQAExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_13051025 ; TravelMate
+%AQAExtensionDisc% = AQAExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_13061025 ; Extensa
+
+[AQAExtension_Install.NT]
+; Empty
+
+[AQAExtension_Install.NT.HW]
+AddReg = AQAExtension_AddReg
+
+[AQAExtension_AddReg]
+; Empty
+
+[AQAExtension_Install.NT.Components]
+AddComponent = AQA_DCHU_component,,AQAExtension_ComponentInstall
+
+[AQAExtension_ComponentInstall]
+ComponentIds=SWComp_AcerQuickAccessDriver
+
+[Strings]
+ManufacturerName = "Acer Incorporated"
+AQAExtensionDisc = "Acer Quick Access Extension Disk"

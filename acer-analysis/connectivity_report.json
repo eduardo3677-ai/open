@@ -1,0 +1,73 @@
+{
+  "connectivity_analysis": [
+    {
+      "endpoint": "https://device-info-uat-ycrmvsk7ia-uc.a.run.app",
+      "host": "device-info-uat-ycrmvsk7ia-uc.a.run.app",
+      "expected_response": "HTTPS handshake",
+      "requirements": [
+        "Internet connectivity",
+        "DNS resolution",
+        "Port 443 accessibility",
+        "SSL certificate validation"
+      ]
+    },
+    {
+      "endpoint": "https://device-info-prd-imub2p4wyq-uc.a.run.app",
+      "host": "device-info-prd-imub2p4wyq-uc.a.run.app",
+      "expected_response": "HTTPS handshake",
+      "requirements": [
+        "Internet connectivity",
+        "DNS resolution",
+        "Port 443 accessibility",
+        "SSL certificate validation"
+      ]
+    },
+    {
+      "endpoint": "https://global-download.acer.com",
+      "host": "global-download.acer.com",
+      "expected_response": "HTTPS handshake",
+      "requirements": [
+        "Internet connectivity",
+        "DNS resolution",
+        "Port 443 accessibility",
+        "SSL certificate validation"
+      ]
+    }
+  ],
+  "dns_resolution": [
+    {
+      "hostname": "device-info-uat-ycrmvsk7ia-uc.a.run.app",
+      "record_types": [
+        "A",
+        "AAAA",
+        "CNAME"
+      ],
+      "notes": "Use standard DNS resolution"
+    },
+    {
+      "hostname": "device-info-prd-imub2p4wyq-uc.a.run.app",
+      "record_types": [
+        "A",
+        "AAAA",
+        "CNAME"
+      ],
+      "notes": "Use standard DNS resolution"
+    },
+    {
+      "hostname": "global-download.acer.com",
+      "record_types": [
+        "A",
+        "AAAA",
+        "CNAME"
+      ],
+      "notes": "Use standard DNS resolution"
+    }
+  ],
+  "security_recommendations": [
+    "Always verify SSL certificates",
+    "Use official Acer clients when possible",
+    "Monitor for unauthorized access",
+    "Keep network libraries updated",
+    "Use proper authentication"
+  ]
+}
