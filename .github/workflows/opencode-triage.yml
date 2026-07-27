@@ -4,9 +4,9 @@ on:
   issues:
     types: [opened]
 
- jobs:
-   triage:
-     if: github.event.issue.user.type == 'User' && github.event.issue.user.login != 'github-actions[bot]'
+jobs:
+  triage:
+    if: github.event.issue.user.type == 'User' && github.event.issue.user.login != 'github-actions[bot]'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
