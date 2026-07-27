@@ -1,5 +1,17 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "model": "azure/zai-org--glm-47-fp8",
+  "small_model": "azure/zai-org--glm-47-fp8",
+  "default_agent": "build",
+  "shell": "/bin/bash",
+  "logLevel": "INFO",
+  "share": "manual",
+  "snapshot": true,
+  "compaction": {
+    "auto": true,
+    "prune": true,
+    "tail_turns": 2
+  },
   "provider": {
     "azure": {
       "npm": "@ai-sdk/openai",
@@ -19,18 +31,94 @@
             "output": ["text"]
           },
           "options": {
-            "thinking": {
+            "tool_falling_back": {
               "type": "enabled"
-            }
+            },
+            "reasoning": {
+              "type": "enabled"
+            },
+            "temperature": 0.6,
+            "max_completion_tokens": 4096,
+            "top_p": 1,
+            "top_k": 40,
+            "presence_penalty": 0,
+            "frequency_penalty": 0
           }
         }
       }
     }
   },
-  "model": "azure/zai-org--glm-47-fp8",
-  "small_model": "azure/zai-org--glm-47-fp8",
-  "compaction": {
-    "auto": true,
-    "prune": true
+  "plugin": [
+    "opencode-wakatime",
+    "opencode-notifier",
+    "opencode-type-inject"
+  ],
+  "skills": {
+    "paths": [
+      ".opencode/skills"
+    ]
+  },
+  "agent": {
+    "expert": {
+      "description": "Expert coding agent for complex tasks with deep reasoning capabilities",
+      "mode": "primary",
+      "model": "azure/zai-org--glm-47-fp8",
+      "steps": 15,
+      "permission": {
+        "edit": "allow",
+        "bash": {"git *": "allow", "*": "ask"}
+      }
+    },
+    "reviewer": {
+      "description": "Code review agent that analyzes code quality and suggests improvements",
+      "mode": "subagent",
+      "model": "azure/zai-org--glm-47-fp8",
+      "permission": {
+        "edit": "deny",
+        "bash": "ask"
+      }
+    }
+  },
+  "command": {
+    "review": {
+      "description": "Review code quality and suggest improvements",
+      "template": "Review the current codebase focusing on code quality, security, performance, and best practices. Provide specific suggestions for improvements.",
+      "agent": "reviewer"
+    },
+    "optimize": {
+      "description": "Optimize code for performance",
+      "template": "Analyze the codebase for performance bottlenecks and optimization opportunities. Implement improvements where appropriate.",
+      "agent": "expert"
+    }
+  },
+  "mcp": {
+    "github": {
+      "type": "remote",
+      "url": "https://smde.github.com/mcp",
+      "enabled": true,
+      "headers": {
+        "Authorization": "Bearer {env:GITHUB_TOKEN}"
+      }
+    },
+    "asp": {
+      "type": "local",
+      "command": ["npx", "-y", "@asp/mcp-server"],
+      "enabled": true
+    }
+  },
+  "tool_output": {
+    "max_lines": 2000,
+    "max_bytes": 51200
+  },
+  "experimental": {
+    "primary_tools": ["edit", "bash"],
+    "mcp_timeout": 30000,
+    "batch_tool": true,
+    "continue_loop_on_deny": true
+  },
+  "permission": {
+    "edit": "ask",
+    "bash": {"git *": "allow", "npm install": "allow", "*": "ask"},
+    "external_directory": {"~/projects/**": "allow", "*": "ask"}
   }
 }
