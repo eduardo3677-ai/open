@@ -1,19 +1,19 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "provider": {
-    "alibaba": {
-      "npm": "@ai-sdk/anthropic",
-      "name": "Alibaba Cloud",
+    "azure": {
+      "npm": "@ai-sdk/openai",
+      "name": "Azure",
       "env": [
         "DASHSCOPE_API_KEY"
       ],
       "options": {
-        "baseURL": "https://dashscope-us.aliyuncs.com/apps/anthropic/v1",
+        "baseURL": "https://eduardob-1534-resource.services.ai.azure.com/openai/v1",
         "apiKey": "{env:DASHSCOPE_API_KEY}"
       },
       "models": {
-        "qwen3.7-plus": {
-          "name": "qwen3.7-plus",
+        "qwen--qwen3-coder-next": {
+          "name": "Qwen3-coder-next",
           "modalities": {
             "input": ["text", "image"],
             "output": ["text"]
@@ -27,8 +27,8 @@
       }
     }
   },
-  "model": "alibaba/qwen3.7-plus",
-  "small_model": "alibaba/qwen3.7-plus",
+  "model": "azure/qwen--qwen3-coder-next",
+  "small_model": "azure/qwen--qwen3-coder-next",
   "compaction": {
     "auto": true,
     "prune": true
