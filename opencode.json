@@ -41,7 +41,7 @@
   },
   "permission": {
     "edit": "allow",
-    "bash": {"git *": "allow", "*": "allow"},
-    "external_directory": {"~/projects/**": "allow", "*": "allow"}
+    "bash": "allow",
+    "external_directory": "allow"
   }
 }
