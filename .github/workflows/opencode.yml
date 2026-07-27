@@ -6,11 +6,12 @@ on:
   pull_request_review_comment:
     types: [created]
 
-jobs:
-  opencode:
-    if: |
-      contains(github.event.comment.body, '/oc') ||
-      contains(github.event.comment.body, '/opencode')
+ jobs:
+   opencode:
+     if: |
+       (contains(github.event.comment.body, '/oc') || contains(github.event.comment.body, '/opencode')) &&
+       github.event.comment.user.type == 'User' &&
+       github.event.comment.user.login != 'github-actions[bot]'
     runs-on: ubuntu-latest
     permissions:
       actions: write
