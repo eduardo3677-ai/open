@@ -17,7 +17,6 @@ Analizar los ejecutables de Acer (`AcerDIAgent.exe`, `AcerCCAgent.exe`, `AcerQAA
 ### Scripts Funcionales
 - **`download_acer_images.py`** - Script principal para descargar imágenes de recuperación
 - **`api_documentation.py`** - Documentación completa de API y ejemplos curl
-- **`download_acer_image.py`** - Script de descarga simple (generado automáticamente)
 
 ### Documentación
 - **`ACER_ANALYSIS_SUMMARY.md`** - Resumen del análisis inicial (170 líneas)
