@@ -1,0 +1,92 @@
+{
+  "timestamp": "2026-07-27T20:50:42.248796",
+  "validation_summary": {
+    "total_parameters": 11,
+    "required_parameters": 3,
+    "validated_parameters": 5
+  },
+  "validation_errors": [],
+  "validated_parameters": [
+    {
+      "name": "acerid",
+      "value": "A1B2C3D4E5F6G7H8I9J0K1L2M3N4O5P6",
+      "status": "valid",
+      "purpose": "Acer device identifier"
+    },
+    {
+      "name": "SNID",
+      "value": "LX123456789",
+      "status": "valid",
+      "purpose": "Serial Number ID"
+    },
+    {
+      "name": "Model",
+      "value": "ASPIRE A315-59",
+      "status": "valid",
+      "purpose": "Device model identifier"
+    },
+    {
+      "name": "OS",
+      "value": "Win11",
+      "status": "valid",
+      "purpose": "Operating system version"
+    },
+    {
+      "name": "LC",
+      "value": "EN",
+      "status": "valid",
+      "purpose": "Language/Location Code"
+    }
+  ],
+  "request_patterns": [
+    {
+      "pattern_name": "Device Info Request",
+      "method": "POST",
+      "url": "https://device-info-prd-imub2p4wyq-uc.a.run.app",
+      "required_params": [
+        "acerid",
+        "SNID",
+        "Model"
+      ],
+      "optional_params": [
+        "OS",
+        "UUID"
+      ],
+      "content_type": "application/x-www-form-urlencoded"
+    },
+    {
+      "pattern_name": "Download Request",
+      "method": "GET",
+      "url": "https://global-download.acer.com/GDFiles/Recovery/",
+      "required_params": [
+        "acerid",
+        "Model"
+      ],
+      "optional_params": [
+        "OS",
+        "LC",
+        "BC",
+        "SC"
+      ],
+      "content_type": "application/x-www-form-urlencoded"
+    },
+    {
+      "pattern_name": "Version Check",
+      "method": "POST",
+      "url": "https://updates.acer.com/api/v1/version-check",
+      "required_params": [
+        "Model",
+        "current_version"
+      ],
+      "optional_params": [
+        "acerid"
+      ],
+      "content_type": "application/json"
+    }
+  ],
+  "parameter_template": {
+    "acerid": "A1B2C3D4E5F6G7H8I9J0K1L2M3N4O5P6",
+    "SNID": "LX123456789",
+    "Model": "ASPIRE A315-59"
+  }
+}
