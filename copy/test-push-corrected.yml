@@ -1,0 +1,61 @@
+name: Test Push Permissions
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  test-push:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: write
+      pull-requests: write
+      issues: write
+      workflows: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Configurar identidad de Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Verificar permisos
+        id: verify
+        run: |
+          echo "Verificando permisos de Git..."
+          git remote -v
+          git log --oneline -5
+          echo "Branch actual: $(git branch --show-current)"
+
+      - name: Crear archivo de prueba
+        run: |
+          echo "Test de push - $(date)" > test-push-verification.txt
+          echo "Este archivo fue creado para verificar permisos de push" >> test-push-verification.txt
+
+      - name: Commit cambios
+        run: |
+          git add test-push-verification.txt
+          git commit -m "Test: Verificar permisos de push [skip ci]"
+
+      - name: Push cambios
+        run: |
+          git push origin HEAD
+        continue-on-error: true
+
+      - name: Verificar resultado
+        if: always()
+        run: |
+          if git log --oneline -1 | grep -q "Test: Verificar permisos de push"; then
+            echo "✅ SUCCESS: El push se realizó correctamente"
+            echo "Los permisos de push están funcionando"
+          else
+            echo "❌ FAILED: El push no se pudo completar"
+            echo "Verifica los permisos del workflow"
+          fi
