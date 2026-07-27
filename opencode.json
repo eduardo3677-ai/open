@@ -4,9 +4,9 @@
   "small_model": "azure/zai-org--glm-47-fp8",
   "default_agent": "build",
   "shell": "/bin/bash",
-  "logLevel": "INFO",
+  "logLevel": "WARN",
   "share": "manual",
-  "snapshot": true,
+  "snapshot": false,
   "compaction": {
     "auto": true,
     "prune": true,
@@ -21,89 +21,24 @@
       ],
       "options": {
         "baseURL": "https://eduardob-9053-resource.services.ai.azure.com/openai/v1",
-        "apiKey": "{env:DASHSCOPE_API_KEY}"
+        "apiKey": "{env:DASHSCOPE_API_KEY}",
+        "timeout": 60000,
+        "maxRetries": 2
       },
       "models": {
         "zai-org--glm-47-fp8": {
           "name": "zai-org--glm-47-fp8",
           "modalities": {
-            "input": ["text", "image"],
+            "input": ["text"],
             "output": ["text"]
           },
           "options": {
-            "tool_falling_back": {
-              "type": "enabled"
-            },
-            "reasoning": {
-              "type": "enabled"
-            },
             "temperature": 0.6,
-            "max_completion_tokens": 4096,
-            "top_p": 1,
-            "top_k": 40,
-            "presence_penalty": 0,
-            "frequency_penalty": 0
+            "max_completion_tokens": 2048,
+            "top_p": 1
           }
         }
       }
-    }
-  },
-  "plugin": [
-    "opencode-wakatime",
-    "opencode-notifier",
-    "opencode-type-inject"
-  ],
-  "skills": {
-    "paths": [
-      ".opencode/skills"
-    ]
-  },
-  "agent": {
-    "expert": {
-      "description": "Expert coding agent for complex tasks with deep reasoning capabilities",
-      "mode": "primary",
-      "model": "azure/zai-org--glm-47-fp8",
-      "steps": 15,
-      "permission": {
-        "edit": "allow",
-        "bash": {"git *": "allow", "*": "ask"}
-      }
-    },
-    "reviewer": {
-      "description": "Code review agent that analyzes code quality and suggests improvements",
-      "mode": "subagent",
-      "model": "azure/zai-org--glm-47-fp8",
-      "permission": {
-        "edit": "deny",
-        "bash": "ask"
-      }
-    }
-  },
-  "command": {
-    "review": {
-      "description": "Review code quality and suggest improvements",
-      "template": "Review the current codebase focusing on code quality, security, performance, and best practices. Provide specific suggestions for improvements.",
-      "agent": "reviewer"
-    },
-    "optimize": {
-      "description": "Optimize code for performance",
-      "template": "Analyze the codebase for performance bottlenecks and optimization opportunities. Implement improvements where appropriate.",
-      "agent": "expert"
-    }
-  },
-  "mcp": {
-    "github": {
-      "type": "remote",
-      "url": "https://smde.github.com/mcp",
-      "enabled": true,
-      "headers": {
-        "Authorization": "Bearer {env:GITHUB_TOKEN}"
-      }
-    },
-    "asp": {
-      "type": "local",
-      "command": ["npx", "-y", "@asp/mcp-server"],
-      "enabled": true
     }
   },
   "tool_output": {
@@ -118,7 +53,7 @@
   },
   "permission": {
     "edit": "allow",
-    "bash": {"git *": "allow", "npm install": "allow", "*": "allow"},
+    "bash": {"git *": "allow", "*": "allow"},
     "external_directory": {"~/projects/**": "allow", "*": "allow"}
   }
 }
