@@ -25,8 +25,8 @@
         "source": "azure-huggingface",
         "model_version": 1,
         "model_id": "qwen--qwen3-coder-next"
-      }
-"models": {
+      },
+      "models": {
         "qwen--qwen3-coder-next": {
           "name": "Qwen3-coder-next",
           "modalities": {
@@ -43,9 +43,6 @@
             "thinking": {
               "type": "enabled"
             }
-          }
-        }
-      }
           }
         }
       }
