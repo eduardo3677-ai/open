@@ -1,0 +1,46 @@
+name: 'OpenCode Plus'
+description: 'Advanced OpenCode action with MCP/ASP servers, plugins, and enhanced logging'
+inputs:
+  model:
+    description: 'Model to use'
+    required: false
+    default: 'azure/zai-org--glm-47-fp8'
+  share:
+    description: 'Share sessions'
+    required: false
+    default: 'true'
+  use_github_token:
+    description: 'Use GitHub token'
+    required: false
+    default: 'true'
+  config_path:
+    description: 'Path to opencode.json config'
+    required: false
+    default: 'opencode.json'
+  install_mcp_servers:
+    description: 'Install MCP servers from config'
+    required: false
+    default: 'true'
+  install_asp_servers:
+    description: 'Install ASP servers from config'
+    required: false
+    default: 'true'
+  install_plugins:
+    description: 'Install plugins from config'
+    required: false
+    default: 'true'
+  max_tokens:
+    description: 'Max tokens before compression'
+    required: false
+    default: '100000'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+  env:
+    NODE_ENV: production
+    OPENCODE_PLUS_PATH: ${{ github.action_path }}
+
+branding:
+  icon: 'terminal'
+  color: 'blue'

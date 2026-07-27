@@ -1,0 +1,28 @@
+name: file-operations
+description: Enhanced file operations plugin for OpenCode Plus
+version: 1.0.0
+author: OpenCode Plus
+enabled: true
+permissions:
+  read: true
+  write: true
+  execute: false
+tools:
+  - name: smart-read
+    description: Read files with syntax highlighting and line numbers
+    command: cat -n
+    extensions: ["*"]
+    timeout: 30000
+  - name: batch-write  
+    description: Write multiple files atomically
+    command: tee
+    extensions: ["*"]
+    timeout: 60000
+  - name: safe-delete
+    description: Delete files with backup before removal
+    command: rm --backup
+    extensions: ["*"]
+    timeout: 15000
+dependencies:
+  - coreutils
+  - backup-tools: optional
