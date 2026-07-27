@@ -1,0 +1,98 @@
+{
+  "$schema": "https://opencode.ai/config-plus.json",
+  "model": "azure/zai-org--glm-47-fp8",
+  "small_model": "azure/zai-org--glm-47-fp8",
+  "shell": "/bin/bash",
+  "logLevel": "INFO",
+  "share": "manual",
+  "compaction": {
+    "auto": true,
+    "prune": true,
+    "tailTurns": 2,
+    "triggerTokenRatio": 0.85,
+    "useSmallModel": true
+  },
+  "extensions": {
+    "plugins": [
+      "opencode-wakatime",
+      "opencode-notifier",
+      "opencode-type-inject"
+    ],
+    "skills": [
+      "code-review",
+      "debugging",
+      "refactoring",
+      "testing"
+    ],
+    "agents": [
+      "expert",
+      "reviewer"
+    ],
+    "formatters": {
+      "github": "markdown",
+      "terminal": "colored"
+    },
+    "asp_servers": [
+      {
+        "id": "azure-main",
+        "name": "Azure Main Server",
+        "endpoint": "https://asp.example.com",
+        "auth": "env:AZURE_KEY",
+        "enabled": true,
+        "timeout": 30000
+      }
+    ],
+    "mcp_servers": [
+      {
+        "id": "github",
+        "type": "github",
+        "name": "GitHub MCP",
+        "config": {
+          "token": "env:GITHUB_TOKEN",
+          "apiType": "graphql"
+        },
+        "enabled": true
+      }
+    ]
+  },
+  "logging": {
+    "show_reasoning": true,
+    "show_tool_calls": true,
+    "show_diffs": true,
+    "show_metadata": true,
+    "format": "markdown",
+    "level": "INFO",
+    "timestamp_format": "iso8601"
+  },
+  "tools": {
+    "use_ripgrep": true,
+    "term_pty": true,
+    "bash_integration": true,
+    "diff_encoding": "unified"
+  },
+  "terminal": {
+    "type": "pty",
+    "shellProgram": "/bin/bash",
+    "encoding": "utf-8"
+  },
+  "permission": {
+    "edit": "ask",
+    "bash": {
+      "git *": "allow",
+      "npm test": "allow",
+      "npm run *": "ask",
+      "*": "ask"
+    },
+    "external_directory": {
+      "~/projects/**": "allow",
+      "*": "deny"
+    }
+  },
+  "collect": {
+    "enabled": true,
+    "artifacts": true,
+    "diffs": true,
+    "logs": true,
+    "storage": "opencode-gallery"
+  }
+}

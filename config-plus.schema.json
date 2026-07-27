@@ -1,0 +1,328 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://opencode.ai/config-plus.json",
+  "title": "OpenCode Plus Configuration Schema",
+  "description": "Enhanced configuration schema for OpenCode with extension support",
+  "type": "object",
+  "required": ["model"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema identifier"
+    },
+    "model": {
+      "type": "string",
+      "description": "Primary model identifier (provider/model)",
+      "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
+    },
+    "small_model": {
+      "type": "string",
+      "description": "Secondary model for auxiliary tasks",
+      "pattern": "^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
+    },
+    "shell": {
+      "type": "string",
+      "description": "Shell program to use for terminal operations",
+      "default": "/bin/bash"
+    },
+    "logLevel": {
+      "type": "string",
+      "enum": ["DEBUG", "INFO", "WARN", "ERROR"],
+      "default": "INFO"
+    },
+    "share": {
+      "type": "string",
+      "enum": ["manual", "auto", "never"],
+      "default": "manual"
+    },
+    "compaction": {
+      "type": "object",
+      "description": "Automatic conversation compression settings",
+      "properties": {
+        "auto": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable automatic compression"
+        },
+        "prune": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable pruning of old messages"
+        },
+        "tailTurns": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "default": 2,
+          "description": "Number of recent turns to preserve"
+        },
+        "triggerTokenRatio": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 0.99,
+          "default": 0.85,
+          "description": "Token usage ratio that triggers compression"
+        },
+        "useSmallModel": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use small model for compression tasks"
+        }
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "description": "Extension system configuration",
+      "properties": {
+        "plugins": {
+          "type": "array",
+          "description": "List of enabled plugins",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "skills": {
+          "type": "array",
+          "description": "List of enabled skills",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "agents": {
+          "type": "array",
+          "description": "List of enabled agents",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "formatters": {
+          "type": "object",
+          "description": "Output formatter configuration",
+          "properties": {
+            "github": {
+              "type": "string",
+              "enum": ["markdown", "plain", "html"],
+              "default": "markdown"
+            },
+            "terminal": {
+              "type": "string",
+              "enum": ["colored", "plain"],
+              "default": "colored"
+            }
+          }
+        },
+        "asp_servers": {
+          "type": "array",
+          "description": "ASP (Azure Service Provider) server configurations",
+          "items": {
+            "type": "object",
+            "required": ["id", "endpoint", "enabled"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Unique server identifier"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Human-readable server name"
+              },
+              "endpoint": {
+                "type": "string",
+                "format": "uri",
+                "description": "Server endpoint URL"
+              },
+              "auth": {
+                "type": "string",
+                "description": "Authentication method (e.g., 'env:AZURE_KEY')"
+              },
+              "enabled": {
+                "type": "boolean",
+                "default": true
+              },
+              "timeout": {
+                "type": "integer",
+                "minimum": 1000,
+                "default": 30000
+              }
+            }
+          }
+        },
+        "mcp_servers": {
+          "type": "array",
+          "description": "MCP (Model Context Protocol) server configurations",
+          "items": {
+            "type": "object",
+            "required": ["id", "type", "enabled"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Unique server identifier"
+              },
+              "type": {
+                "type": "string",
+                "enum": ["github", "filesystem", "database", "custom"],
+                "description": "Server type"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Human-readable server name"
+              },
+              "config": {
+                "type": "object",
+                "description": "Server-specific configuration"
+              },
+              "enabled": {
+                "type": "boolean",
+                "default": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "logging": {
+      "type": "object",
+      "description": "Enhanced logging configuration",
+      "properties": {
+        "show_reasoning": {
+          "type": "boolean",
+          "default": true,
+          "description": "Display model reasoning traces"
+        },
+        "show_tool_calls": {
+          "type": "boolean",
+          "default": true,
+          "description": "Display tool invocation details"
+        },
+        "show_diffs": {
+          "type": "boolean",
+          "default": true,
+          "description": "Display file change diffs"
+        },
+        "show_metadata": {
+          "type": "boolean",
+          "default": true,
+          "description": "Display session metadata"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["markdown", "plain", "html", "colored"],
+          "default": "markdown"
+        },
+        "level": {
+          "type": "string",
+          "enum": ["DEBUG", "INFO", "WARN", "ERROR"],
+          "default": "INFO"
+        },
+        "timestamp_format": {
+          "type": "string",
+          "default": "iso8601",
+          "description": "Timestamp format for logs"
+        }
+      }
+    },
+    "tools": {
+      "type": "object",
+      "description": "Tool integration configuration",
+      "properties": {
+        "use_ripgrep": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable ripgrep for fast content searching"
+        },
+        "term_pty": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable PTY terminal emulation"
+        },
+        "bash_integration": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable bash shell integration"
+        },
+        "diff_encoding": {
+          "type": "string",
+          "enum": ["unified", "context", "none"],
+          "default": "unified"
+        }
+      }
+    },
+    "terminal": {
+      "type": "object",
+      "description": "Terminal configuration",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["pty", "dumb"],
+          "default": "pty"
+        },
+        "shellProgram": {
+          "type": "string",
+          "default": "/bin/bash"
+        },
+        "encoding": {
+          "type": "string",
+          "default": "utf-8"
+        }
+      }
+    },
+    "permission": {
+      "type": "object",
+      "description": "Permission rules for operations",
+      "properties": {
+        "edit": {
+          "type": "string",
+          "enum": ["allow", "ask", "deny"],
+          "default": "ask"
+        },
+        "bash": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "enum": ["allow", "ask", "deny"]
+          }
+        },
+        "external_directory": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "enum": ["allow", "deny"]
+          }
+        }
+      }
+    },
+    "collect": {
+      "type": "object",
+      "description": "Artifact collection settings",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "artifacts": {
+          "type": "boolean",
+          "default": true
+        },
+        "diffs": {
+          "type": "boolean",
+          "default": true
+        },
+        "logs": {
+          "type": "boolean",
+          "default": true
+        },
+        "storage": {
+          "type": "string",
+          "default": "opencode-gallery"
+        }
+      }
+    }
+  }
+}
