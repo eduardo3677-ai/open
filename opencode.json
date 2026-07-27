@@ -5,7 +5,6 @@
   "shell": "/bin/bash",
   "logLevel": "WARN",
   "share": "manual",
-  "snapshot": false,
   "compaction": {
     "auto": true,
     "prune": true,
@@ -39,16 +38,6 @@
         }
       }
     }
-  },
-  "tool_output": {
-    "max_lines": 2000,
-    "max_bytes": 51200
-  },
-  "experimental": {
-    "primary_tools": ["edit", "bash"],
-    "mcp_timeout": 30000,
-    "batch_tool": true,
-    "continue_loop_on_deny": true
   },
   "permission": {
     "edit": "allow",
