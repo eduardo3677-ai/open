@@ -1,1 +1,36 @@
-404: Not Found
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "alibaba": {
+      "npm": "@ai-sdk/anthropic",
+      "name": "Alibaba Cloud",
+      "env": [
+        "DASHSCOPE_API_KEY"
+      ],
+      "options": {
+        "baseURL": "https://dashscope-us.aliyuncs.com/apps/anthropic/v1",
+        "apiKey": "{env:DASHSCOPE_API_KEY}"
+      },
+      "models": {
+        "qwen3.7-plus": {
+          "name": "qwen3.7-plus",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "thinking": {
+              "type": "enabled"
+            }
+          }
+        }
+      }
+    }
+  },
+  "model": "alibaba/qwen3.7-plus",
+  "small_model": "alibaba/qwen3.7-plus",
+  "compaction": {
+    "auto": true,
+    "prune": true
+  }
+}
