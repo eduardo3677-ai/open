@@ -8,12 +8,12 @@
         "DASHSCOPE_API_KEY"
       ],
       "options": {
-        "baseURL": "https://eduardob-1534-resource.services.ai.azure.com/openai/v1",
+        "baseURL": "https://eduardob-9053-resource.services.ai.azure.com/openai/v1",
         "apiKey": "{env:DASHSCOPE_API_KEY}"
       },
       "models": {
-        "qwen--qwen3-coder-next": {
-          "name": "Qwen3-coder-next",
+        "zai-org--glm-47-fp8": {
+          "name": "zai-org--glm-47-fp8",
           "modalities": {
             "input": ["text", "image"],
             "output": ["text"]
@@ -27,8 +27,8 @@
       }
     }
   },
-  "model": "azure/qwen--qwen3-coder-next",
-  "small_model": "azure/qwen--qwen3-coder-next",
+  "model": "azure/zai-org--glm-47-fp8",
+  "small_model": "azure/zai-org--glm-47-fp8",
   "compaction": {
     "auto": true,
     "prune": true
