@@ -1,0 +1,54 @@
+;/*++
+; Copyright (c) I3D Technology Inc.  All rights reserved.
+; INF: acerdi_ext.inf
+;--*/
+
+[Version]
+Signature = "$WINDOWS NT$"
+Class = Extension
+ClassGuid = {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+Provider = %ManufacturerName%
+ExtensionId = {0238614e-f3bb-4abf-8d89-082242fe2498}
+CatalogFile = acerdi_ext.cat
+DriverVer = 05/21/2023,1.2.7.1007
+PnpLockdown = 1
+
+[Manufacturer]
+%ManufacturerName% = ADIExtension, NTamd64.10.0...22000
+
+[ADIExtension.NTamd64.10.0...22000]
+%ADIExtensionDisc% = ADIExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_10031025 ; Aspire
+%ADIExtensionDisc% = ADIExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_10041025 ; Swift
+%ADIExtensionDisc% = ADIExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_10051025 ; TravelMate
+%ADIExtensionDisc% = ADIExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_10061025 ; Extensa
+
+; Next-Gen x86
+%ADIExtensionDisc% = ADIExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_11031025 ; Aspire
+%ADIExtensionDisc% = ADIExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_11041025 ; Swift
+%ADIExtensionDisc% = ADIExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_11051025 ; TravelMate
+%ADIExtensionDisc% = ADIExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_11061025 ; Extensa
+
+; Next-Gen AMD
+%ADIExtensionDisc% = ADIExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_13031025 ; Aspire
+%ADIExtensionDisc% = ADIExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_13041025 ; Swift
+%ADIExtensionDisc% = ADIExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_13051025 ; TravelMate
+%ADIExtensionDisc% = ADIExtension_Install, ACPI\VEN_1025&DEV_165F&SUBSYS_13061025 ; Extensa
+
+[ADIExtension_Install.NT]
+; Empty
+
+[ADIExtension_Install.NT.HW]
+AddReg = ADIExtension_AddReg
+
+[ADIExtension_AddReg]
+; Empty
+
+[ADIExtension_Install.NT.Components]
+AddComponent = ADI_DCHU_component,,ADIExtension_ComponentInstall
+
+[ADIExtension_ComponentInstall]
+ComponentIds=SWComp_AcerDeviceInfoSW2Driver
+
+[Strings]
+ManufacturerName = "Acer Incorporated"
+ADIExtensionDisc = "Acer Device Info Extension Disk"
