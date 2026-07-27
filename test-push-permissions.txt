@@ -1,0 +1,2 @@
+Test file to verify push permissions without requiring workflows permission.
+Created: 2026-07-27
