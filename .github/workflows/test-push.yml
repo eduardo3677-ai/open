@@ -1,0 +1,29 @@
+name: test-push
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  test-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+      - name: Configure git identity
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Create test file
+        run: echo "Test file created at $(date)" > test-push.txt
+      - name: Commit changes
+        run: |
+          git add test-push.txt
+          git commit -m "Test push workflow" || echo "No changes to commit"
+          git push
