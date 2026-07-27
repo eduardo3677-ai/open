@@ -1,12 +1,7 @@
 {
-  "name": "opencode-scripts",
+  "name": "opencode-config",
   "version": "1.0.0",
-  "description": "Utility scripts for OpenCode automation",
-  "scripts": {
-    "backup": "node .opencode/scripts/backup.js",
-    "analyze": "node .opencode/scripts/analysis.js",
-    "utils": "node .opencode/scripts/utils.js"
-  },
+  "description": "OpenCode configuration",
   "dependencies": {
     "@opencode-ai/plugin": "1.18.7"
   },
