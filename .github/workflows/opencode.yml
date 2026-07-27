@@ -30,12 +30,18 @@ jobs:
            git config --global user.name "github-actions[bot]"
            git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
     
-       - name: Run OpenCode
-         uses: anomalyco/opencode/github@latest
-         env:
-           DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
-           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-         with:
-           model: azure/zai-org--glm-47-fp8
-           share: true
-           use_github_token: true
+        - name: Run OpenCode Plus
+          uses: ./.github/actions/opencode-plus
+          env:
+            DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
+            GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+            PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+          with:
+            model: azure/zai-org--glm-47-fp8
+            share: true
+            use_github_token: true
+            config_path: opencode-plus.json
+            install_mcp_servers: true
+            install_asp_servers: true
+            install_plugins: true
+            max_tokens: 80000

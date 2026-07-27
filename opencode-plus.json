@@ -1,0 +1,147 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "azure/zai-org--glm-47-fp8",
+  "small_model": "azure/zai-org--glm-47-fp8",
+  "shell": "/bin/bash",
+  "logLevel": "INFO",
+  "share": "manual",
+  "compaction": {
+    "auto": true,
+    "prune": true,
+    "tail_turns": 2,
+    "max_tokens": 80000
+  },
+  
+  "mcpServers": [
+    {
+      "name": "filesystem",
+      "enabled": true,
+      "install": "npm install -g @modelcontextprotocol/server-filesystem",
+      "env": {
+        "MCP_SERVER_FILESYSTEM_PATH": "/workspace"
+      }
+    },
+    {
+      "name": "github", 
+      "enabled": true,
+      "install": "npm install -g @modelcontextprotocol/server-github",
+      "env": {
+        "GITHUB_TOKEN": "{env:GITHUB_TOKEN}"
+      }
+    }
+  ],
+  
+  "aspServers": [
+    {
+      "name": "code-analysis",
+      "enabled": true,
+      "install": "pip install asp-code-analyzer",
+      "command": "asp-code-analyzer"
+    },
+    {
+      "name": "security-scanner",
+      "enabled": true,
+      "install": "pip install asp-security",
+      "command": "asp-security-scan"
+    }
+  ],
+  
+  "plugins": [
+    {
+      "name": "eslint",
+      "enabled": true,
+      "install": "npm install -g eslint",
+      "command": "eslint"
+    },
+    {
+      "name": "prettier",
+      "enabled": true,
+      "install": "npm install -g prettier",
+      "command": "prettier"
+    }
+  ],
+  
+  "skills": [
+    {
+      "name": "code-review",
+      "enabled": true,
+      "path": ".opencode/skills/code-review/SKILL.md"
+    },
+    {
+      "name": "debugging",
+      "enabled": true,
+      "path": ".opencode/skills/debugging/SKILL.md"
+    },
+    {
+      "name": "refactoring",
+      "enabled": true,
+      "path": ".opencode/skills/refactoring/SKILL.md"
+    },
+    {
+      "name": "testing",
+      "enabled": true,
+      "path": ".opencode/skills/testing/SKILL.md"
+    }
+  ],
+  
+  "formatters": [
+    {
+      "name": "javascript",
+      "enabled": true,
+      "install": "npm install -g prettier",
+      "command": "prettier --write",
+      "extensions": [".js", ".jsx", ".ts", ".tsx"]
+    },
+    {
+      "name": "python",
+      "enabled": true,
+      "install": "pip install black",
+      "command": "black",
+      "extensions": [".py"]
+    }
+  ],
+  
+  "terminal": {
+    "enabled": true,
+    "allow_dangerous_commands": false,
+    "timeout": 120000,
+    "max_concurrent": 3
+  },
+  
+  "enhanced_logging": {
+    "show_reasoning": true,
+    "show_commands": true,
+    "show_diffs": true,
+    "show_file_operations": true,
+    "token_usage": true,
+    "performance_metrics": true
+  },
+  
+  "provider": {
+    "azure": {
+      "npm": "@ai-sdk/openai",
+      "name": "Azure",
+      "env": ["DASHSCOPE_API_KEY"],
+      "options": {
+        "baseURL": "https://eduardob-9053-resource.services.ai.azure.com/openai/v1",
+        "apiKey": "{env:DASHSCOPE_API_KEY}",
+        "timeout": 120000,
+        "maxRetries": 5
+      },
+      "models": {
+        "zai-org--glm-47-fp8": {
+          "name": "zai-org--glm-47-fp8",
+          "modalities": {
+            "input": ["text"],
+            "output": ["text"]
+          },
+          "options": {
+            "temperature": 0.6,
+            "max_completion_tokens": 4098,
+            "top_p": 1
+          }
+        }
+      }
+    }
+  }
+}
