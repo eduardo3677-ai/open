@@ -28,7 +28,7 @@ jobs:
           DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          model: azure/qwen--qwen3-coder-next
+          model: azure/zai-org--glm-47-fp8
           share: true
           use_github_token: true
           prompt: ${{ github.event.issue.body }}
