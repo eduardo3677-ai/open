@@ -32,7 +32,7 @@ jobs:
          uses: anomalyco/opencode/github@latest
          env:
            DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
          with:
            model: azure/zai-org--glm-47-fp8
            share: true
