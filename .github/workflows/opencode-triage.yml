@@ -43,7 +43,7 @@ jobs:
           DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          model: alibaba/qwen3.7-plus
-          share: false
+          model: azure/qwen--qwen3-coder-next
+          share: true
           use_github_token: true
           prompt: ${{ github.event.issue.body }}
