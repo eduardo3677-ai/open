@@ -1,0 +1,121 @@
+{
+  "device": {
+    "model": "A315-59",
+    "snid": "NXK6TAL019416025803400"
+  },
+  "analysis_summary": {
+    "total_discovered_files": 18,
+    "analysis_methods_used": [
+      "sitemap_content_discovery",
+      "robots_txt_analysis",
+      "url_patterns_from_analysis",
+      "aspire_specific_patterns",
+      "file_extension_variations",
+      "model_code_variations"
+    ]
+  },
+  "discovered_files": [
+    {
+      "url": "https://www.acer.com/sitemap.xml",
+      "source": "robots.txt",
+      "pattern": "sitemap discovered"
+    },
+    {
+      "url": "https://www.acer.com/predator/sitemap.xml",
+      "source": "robots.txt",
+      "pattern": "sitemap discovered"
+    },
+    {
+      "url": "https://support.acer.com/Drivers/CID/A315-59",
+      "source": "gd pattern",
+      "status_code": 200
+    },
+    {
+      "url": "https://support.acer.com/Drivers/CID/NI/A315-59",
+      "source": "gd pattern",
+      "status_code": 200
+    },
+    {
+      "url": "https://support.acer.com/Drivers/CID/A315-59",
+      "source": "aspire pattern",
+      "status_code": 200
+    },
+    {
+      "url": "https://support.acer.com/drivers/A315-59",
+      "source": "aspire pattern",
+      "status_code": 200
+    },
+    {
+      "url": "https://support.acer.com/A315-59/",
+      "source": "model variation",
+      "status_code": 200,
+      "model_variation": "A315-59"
+    },
+    {
+      "url": "https://support.acer.com/A31559/",
+      "source": "model variation",
+      "status_code": 200,
+      "model_variation": "A31559"
+    },
+    {
+      "url": "https://support.acer.com/A315_59/",
+      "source": "model variation",
+      "status_code": 200,
+      "model_variation": "A315_59"
+    },
+    {
+      "url": "https://support.acer.com/A315-59-XXXX/",
+      "source": "model variation",
+      "status_code": 200,
+      "model_variation": "A315-59-XXXX"
+    },
+    {
+      "url": "https://support.acer.com/Aspire-A315-59/",
+      "source": "model variation",
+      "status_code": 200,
+      "model_variation": "Aspire-A315-59"
+    },
+    {
+      "url": "https://support.acer.com/Aspire_A315_59/",
+      "source": "model variation",
+      "status_code": 200,
+      "model_variation": "Aspire_A315_59"
+    },
+    {
+      "url": "https://support.acer.com/AspireA31559/",
+      "source": "model variation",
+      "status_code": 200,
+      "model_variation": "AspireA31559"
+    },
+    {
+      "url": "https://support.acer.com/ASPIRE-A315-59/",
+      "source": "model variation",
+      "status_code": 200,
+      "model_variation": "ASPIRE-A315-59"
+    },
+    {
+      "url": "https://support.acer.com/ASPIRE_A315_59/",
+      "source": "model variation",
+      "status_code": 200,
+      "model_variation": "ASPIRE_A315_59"
+    },
+    {
+      "url": "https://support.acer.com/ASPIREA31559/",
+      "source": "model variation",
+      "status_code": 200,
+      "model_variation": "ASPIREA31559"
+    },
+    {
+      "url": "https://support.acer.com/NXK6TALK6TAL019416025803400/",
+      "source": "model variation",
+      "status_code": 200,
+      "model_variation": "NXK6TALK6TAL019416025803400"
+    },
+    {
+      "url": "https://support.acer.com/NXK6TAL019416025803400/",
+      "source": "model variation",
+      "status_code": 200,
+      "model_variation": "NXK6TAL019416025803400"
+    }
+  ]
+}
