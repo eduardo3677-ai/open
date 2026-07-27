@@ -1,0 +1,14 @@
+{
+  "name": "opencode-scripts",
+  "version": "1.0.0",
+  "description": "Utility scripts for OpenCode automation",
+  "scripts": {
+    "backup": "node .opencode/scripts/backup.js",
+    "analyze": "node .opencode/scripts/analysis.js",
+    "utils": "node .opencode/scripts/utils.js"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
