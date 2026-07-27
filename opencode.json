@@ -21,8 +21,8 @@
       "options": {
         "baseURL": "https://eduardob-9053-resource.services.ai.azure.com/openai/v1",
         "apiKey": "{env:DASHSCOPE_API_KEY}",
-        "timeout": 60000,
-        "maxRetries": 2
+        "timeout": 120000,
+        "maxRetries": 5
       },
       "models": {
         "zai-org--glm-47-fp8": {
