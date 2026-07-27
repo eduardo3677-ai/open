@@ -117,8 +117,8 @@
     "continue_loop_on_deny": true
   },
   "permission": {
-    "edit": "ask",
-    "bash": {"git *": "allow", "npm install": "allow", "*": "ask"},
-    "external_directory": {"~/projects/**": "allow", "*": "ask"}
+    "edit": "allow",
+    "bash": {"git *": "allow", "npm install": "allow", "*": "allow"},
+    "external_directory": {"~/projects/**": "allow", "*": "allow"}
   }
 }
